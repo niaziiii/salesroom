@@ -1,4 +1,0 @@
-Sign up link -> https://synca.outseta.com/auth?widgetMode=register#o-anonymous
-Login link -> https://synca.outseta.com/auth?widgetMode=login#o-anonymous
-Logout link ->  /#o-logout-link
-Profile link -> https://synca.outseta.com/profile#o-authenticated
