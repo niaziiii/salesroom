@@ -14,7 +14,7 @@ import { EditorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "draft-js/dist/Draft.css";
 import AddIcon from "@mui/icons-material/Add";
-import AddSectionModal from "@/components/salesroom/addSectionModal";
+import AddSectionModal from "@/components/shared/addSectionModal";
 import EditIcon from "@mui/icons-material/Edit";
 
 const CreateNew = () => {
@@ -32,14 +32,12 @@ const CreateNew = () => {
     }
   };
 
-
   return (
     <Container>
       <AddSectionModal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         addNewElement={() => console.log("Hello")}
-
       />
       <Grid container mb={10}>
         <Grid item lg={12} md={12} sm={12}>

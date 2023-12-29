@@ -79,7 +79,7 @@ const AddSectionModal = ({ open, onClose, addNewElement }) => {
               icon={<ChecklistIcon sx={{ fontSize: 38 }} />}
               caption="Next Step"
               onClick={() => {
-                addNewElement({ type: "checkboxes", content: {} });
+                addNewElement({ type: "checkbox", content: {} });
                 onClose();
               }}
             />

@@ -14,7 +14,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "draft-js/dist/Draft.css";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import dynamic from "next/dynamic";
-import CustomTable from "@/components/salesroom/saleshandofflisting";
+import CustomTable from "@/components/shared/listingTable";
 const DynamicEditor = dynamic(
   () => import("react-draft-wysiwyg").then((module) => module.Editor),
   { ssr: false }
