@@ -50,10 +50,12 @@ const acceptanceData = Array.from({ length: 3 }, (_, index) => {
     ` » How your prospect will achieve success with your solution`,
   ];
 });
-const TextSection = ({ addNewElement }) => {
+const TextSection = ({ addNewElement, content }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(ContentState.createFromText("Default Text"))
+    EditorState.createWithContent(
+      ContentState.createFromText(content?.text || "")
+    )
   );
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState);
@@ -481,7 +483,10 @@ const OnBoarding = () => {
             case "text":
               return (
                 <>
-                  <TextSection addNewElement={addNewElement} />
+                  <TextSection
+                    addNewElement={addNewElement}
+                    content={element.content}
+                  />
                 </>
               );
             case "table":

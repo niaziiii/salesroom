@@ -18,6 +18,7 @@ import {
 import { ExpandMore } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { createPage } from "@/pagesAPI";
+import { onboardingtext, saleshandofftext, salesroomtext } from "@/textData";
 
 export const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -58,7 +59,7 @@ const CreateNewPageModal = ({ open, onClose }) => {
   const handleCreateWorkspace = async () => {
     if (selectedItem === "/saleshandoff") {
       const elements = [
-        { type: "text", content: {} },
+        { type: "text", content: { text: saleshandofftext } },
         { type: "table", content: {} },
         { type: "table", content: {} },
       ];
@@ -88,7 +89,7 @@ const CreateNewPageModal = ({ open, onClose }) => {
       }
     } else if (selectedItem === "/onboarding") {
       const elements = [
-        { type: "text", content: {} },
+        { type: "text", content: { text: onboardingtext } },
         { type: "checkbox", content: {} },
         { type: "table", content: {} },
       ];
