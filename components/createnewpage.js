@@ -1,0 +1,178 @@
+import React, { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import {
+  Box,
+  Divider,
+  List,
+  ListItemButton,
+  ListItemText,
+  ListSubheader,
+  Slide,
+} from "@mui/material";
+import { ExpandMore } from "@mui/icons-material";
+import { useRouter } from "next/router";
+import { createPage } from "@/pagesAPI";
+
+export const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const ListItemWithHeading = ({ heading, description, link, onSelect }) => (
+  <ListItemButton
+    sx={{
+      borderRadius: 1,
+      "&:focus": {
+        color: "#FFF",
+        backgroundColor: "#2B5CE6", // Change the background color on focus
+      },
+    }}
+    onClick={() => onSelect(link)}
+  >
+    <ListItemText
+      primary={
+        <>
+          <Typography variant="body1" fontWeight="bold">
+            {heading}
+          </Typography>
+          <Typography variant="body1">{description}</Typography>
+        </>
+      }
+    />
+  </ListItemButton>
+);
+
+const CreateNewPageModal = ({ open, onClose }) => {
+  const router = useRouter();
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleSelectItem = (item) => {
+    setSelectedItem(item);
+  };
+
+  const handleCreateWorkspace = async () => {
+    if (selectedItem === "/salesroom") {
+      const elements = [
+        { type: "text", content: {} },
+        { type: "table", content: {} },
+        { type: "table", content: {} },
+      ];
+      try {
+        // Create the page and get the ID
+        const pageId = await createPage("Salesroom Title", elements);
+        console.log(pageId);
+        // Redirect to the newly created page
+        router.push(`/salesroom/${pageId}`);
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      router.push(selectedItem);
+    }
+
+    handleClose();
+  };
+  const handleClose = () => {
+    setSelectedItem(null);
+    onClose();
+  };
+  return (
+    <Dialog
+      open={open}
+      TransitionComponent={Transition}
+      onClose={handleClose}
+      PaperProps={{ sx: { borderRadius: "10px", p: 2 } }}
+    >
+      <DialogTitle>
+        <Box display={"flex"} alignItems={"center"}>
+          <AddCircleOutlineIcon
+            fontSize="large"
+            sx={{ mr: 2, color: "#2B5CE6" }}
+          />
+          <Box>
+            <Typography variant="body2">Choose a template</Typography>
+            <Typography
+              variant="body2"
+              color="#2B5CE6"
+              sx={{
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                router.push("/createnew");
+                handleClose();
+              }}
+            >
+              or create from scratch
+            </Typography>
+          </Box>
+        </Box>
+      </DialogTitle>
+      <Divider />
+      <DialogContent>
+        <List
+          sx={{ width: "100%", bgcolor: "background.paper" }}
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+          subheader={
+            <ListSubheader
+              component="div"
+              id="nested-list-subheader"
+              sx={{ display: "flex", py: 1 }}
+            >
+              <ExpandMore />
+              <Typography fontWeight={700}>Templates</Typography>
+            </ListSubheader>
+          }
+        >
+          <ListItemWithHeading
+            heading="Salesroom"
+            description="Some description description for Drafts for Sent mail"
+            link="/salesroom"
+            onSelect={handleSelectItem}
+          />
+          <ListItemWithHeading
+            heading="Sales Handoff"
+            description="Some description for Drafts description for Drafts"
+            link="/"
+            onSelect={handleSelectItem}
+          />
+          <ListItemWithHeading
+            heading="Onboarding"
+            description="Some description description for Draftsor Sent mail"
+            link="/"
+            onSelect={handleSelectItem}
+          />
+        </List>
+      </DialogContent>
+
+      <DialogActions sx={{ textAlign: "center", p: 3 }}>
+        <Button color="primary" onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button
+          onClick={handleCreateWorkspace}
+          sx={{
+            color: "#FFF",
+            backgroundColor: "#2B5CE6",
+            "&:disabled": {
+              backgroundColor: "#A0A0A0", // Change to your desired disabled color
+            },
+            "&:hover": {
+              background: "#2B5CE6", // Set the same background color on hover
+            },
+          }}
+          disabled={!selectedItem} // Disable the button if no item is selected
+        >
+          Create Workspace
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+export default CreateNewPageModal;
