@@ -56,7 +56,7 @@ const CreateNewPageModal = ({ open, onClose }) => {
   };
 
   const handleCreateWorkspace = async () => {
-    if (selectedItem === "/salesroom") {
+    if (selectedItem === "/saleshandoff") {
       const elements = [
         { type: "text", content: {} },
         { type: "table", content: {} },
@@ -64,10 +64,40 @@ const CreateNewPageModal = ({ open, onClose }) => {
       ];
       try {
         // Create the page and get the ID
-        const pageId = await createPage("Salesroom Title", elements);
+        const pageId = await createPage("SalesHandOff Title", elements);
+        console.log(pageId);
+        // Redirect to the newly created page
+        router.push(`/saleshandoff/${pageId}`);
+      } catch (error) {
+        alert(error);
+      }
+    } else if (selectedItem === "/salesroom") {
+      const elements = [
+        { type: "text", content: { text: salesroomtext } },
+        { type: "checkbox", content: {} },
+        { type: "file", content: {} },
+      ];
+      try {
+        // Create the page and get the ID
+        const pageId = await createPage("SalesRoom Title", elements);
         console.log(pageId);
         // Redirect to the newly created page
         router.push(`/salesroom/${pageId}`);
+      } catch (error) {
+        alert(error);
+      }
+    } else if (selectedItem === "/onboarding") {
+      const elements = [
+        { type: "text", content: {} },
+        { type: "checkbox", content: {} },
+        { type: "table", content: {} },
+      ];
+      try {
+        // Create the page and get the ID
+        const pageId = await createPage("ObBoarding Title", elements);
+        console.log(pageId);
+        // Redirect to the newly created page
+        router.push(`/onboarding/${pageId}`);
       } catch (error) {
         alert(error);
       }
@@ -138,13 +168,13 @@ const CreateNewPageModal = ({ open, onClose }) => {
           <ListItemWithHeading
             heading="Sales Handoff"
             description="Some description for Drafts description for Drafts"
-            link="/"
+            link="/saleshandoff"
             onSelect={handleSelectItem}
           />
           <ListItemWithHeading
             heading="Onboarding"
             description="Some description description for Draftsor Sent mail"
-            link="/"
+            link="/onboarding"
             onSelect={handleSelectItem}
           />
         </List>
