@@ -361,7 +361,7 @@ const FileSection = ({ addNewElement }) => {
   );
 };
 
-const SalesRoom = () => {
+const OnBoarding = () => {
   const router = useRouter();
   const { id } = router.query;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -419,7 +419,7 @@ const SalesRoom = () => {
                   contentEditable
                   onInput={(e) => console.log(e.currentTarget.textContent)}
                 >
-                  Sales Room
+                  OnBoarding
                 </Typography>
                 <Typography contentEditable>Company name</Typography>
               </Box>
@@ -524,4 +524,4 @@ const SalesRoom = () => {
   );
 };
 
-export default SalesRoom;
+export default OnBoarding;
