@@ -22,9 +22,7 @@ import LinkIcon from "@mui/icons-material/Link";
 import { drawerWidth } from "./layout";
 import { useRouter } from "next/router";
 import Link from "next/link";
-const CustomAppBar = ({
-  handleDrawerToggle,
-}) => {
+const CustomAppBar = ({ handleDrawerToggle }) => {
   const router = useRouter();
   const [authenticated, setAuthenticated] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -64,6 +62,9 @@ const CustomAppBar = ({
       },
     },
   }));
+
+  const O_LOGIN_URL =
+    "https://localhost:3000/auth?widgetMode=login#o-anonymous";
   return (
     <AppBar
       position="fixed"
@@ -170,8 +171,10 @@ const CustomAppBar = ({
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <Link href='https://synca.outseta.com/auth?widgetMode=register#o-anonymous'
-                style={{ textDecoration: 'none', color: 'GrayText' }}>
+              <Link
+                href="https://synca.outseta.com/auth?widgetMode=register#o-anonymous"
+                style={{ textDecoration: "none", color: "GrayText" }}
+              >
                 <MenuItem
                   // onClick={handleCloseUserMenu}
                   sx={{ marginRight: 6 }}
@@ -179,28 +182,32 @@ const CustomAppBar = ({
                   <Typography textAlign="center">Sign Up</Typography>
                 </MenuItem>
               </Link>
-              {
-                authenticated ?
-                  <Link href='/#o-logout-link' style={{ textDecoration: 'none', color: 'GrayText' }}>
-                    <MenuItem
-                      // onClick={handleCloseUserMenu}
-                      sx={{ marginRight: 6 }}
-                    >
-                      <Typography textAlign="center">Log Out</Typography>
-                    </MenuItem>
-                  </Link> :
-                  <Link href='https://synca.outseta.com/auth?widgetMode=login#o-anonymous'
-                    style={{ textDecoration: 'none', color: 'GrayText' }}>
-                    <MenuItem
-                      // onClick={handleCloseUserMenu}
-                      sx={{ marginRight: 6 }}
-                    >
-                      <Typography textAlign="center">Log In</Typography>
-                    </MenuItem>
-                  </Link>
-              }
-
-
+              {authenticated ? (
+                <Link
+                  href="/#o-logout-link"
+                  style={{ textDecoration: "none", color: "GrayText" }}
+                >
+                  <MenuItem
+                    // onClick={handleCloseUserMenu}
+                    sx={{ marginRight: 6 }}
+                  >
+                    <Typography textAlign="center">Log Out</Typography>
+                  </MenuItem>
+                </Link>
+              ) : (
+                <Link
+                  href="https://synca.outseta.com/auth?widgetMode=login#o-anonymous"
+                  style={{ textDecoration: "none", color: "GrayText" }}
+                >
+                  <MenuItem
+                    // onClick={handleCloseUserMenu}
+                    sx={{ marginRight: 6 }}
+                  >
+                    <Typography textAlign="center">Log In</Typography>
+                  </MenuItem>
+                </Link>
+              )}
+              <a href={O_LOGIN_URL}>Lcogin</a>
             </Menu>
           </Box>
         </Box>

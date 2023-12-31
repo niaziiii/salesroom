@@ -53,6 +53,7 @@ const CreateNewPageModal = ({ open, onClose }) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleSelectItem = (item) => {
+    console.log({ item });
     setSelectedItem(item);
   };
 
@@ -161,20 +162,20 @@ const CreateNewPageModal = ({ open, onClose }) => {
           }
         >
           <ListItemWithHeading
-            heading="Salesroom"
-            description="Some description description for Drafts for Sent mail"
-            link="/salesroom"
-            onSelect={handleSelectItem}
-          />
-          <ListItemWithHeading
             heading="Sales Handoff"
-            description="Some description for Drafts description for Drafts"
+            description="Use this template to create a Handoff with your CS Team"
             link="/saleshandoff"
             onSelect={handleSelectItem}
           />
           <ListItemWithHeading
+            heading="Sales Room"
+            description="Perfect for managing deals and visualizing the buyer journey"
+            link="/salesroom"
+            onSelect={handleSelectItem}
+          />
+          <ListItemWithHeading
             heading="Onboarding"
-            description="Some description description for Draftsor Sent mail"
+            description="This page will help streamline your onboarding process"
             link="/onboarding"
             onSelect={handleSelectItem}
           />
